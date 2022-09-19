@@ -1,0 +1,195 @@
+syntax = "proto3";
+
+package idns.identity;
+
+message IdentityEntity{
+    string identity = 1;
+    string public_key = 2;
+    string name = 3;
+    string avatar = 4;
+    string identity_type = 5;
+    string description = 6;
+    string cid = 7;
+    string ed25519_ciphertext = 8;
+    string ed25519_salt = 9;
+    string ed25519_nonce = 10;
+    string sr25519_public_key = 11;
+    string sr25519_ciphertext = 12;
+    string sr25519_salt = 13;
+    string sr25519_nonce = 14;
+    uint64 create_at = 15;
+}
+ 
+message ListIdentitiesResponse{
+    repeated IdentityEntity identities = 1;
+}
+
+message IdentityCreateRequest{
+    string name = 3;
+    string avatar = 4;
+    string identity_type = 5;
+    string description = 6;
+}
+
+message IdentityUpdateRequest{
+    string identity = 1;
+    string name = 3;
+    string avatar = 4;
+    string description = 6;
+}
+
+// meta_credential
+message MetaCredentialEntity{
+    string id = 1;
+    string source_identity = 2;
+    string name = 3;
+    string credential_type = 4;
+    uint32 expires = 5;
+    string assert_expression = 6;
+    string parameters = 7;
+    string description = 8;
+    uint32 issuance_date = 9;
+    uint32 issuance_status = 10;
+    uint64 create_at = 11;
+}
+
+message ListMetaCredentialsResponse{
+    repeated MetaCredentialEntity meta_credentials = 1;
+}
+
+
+message MetaCredentialCreateRequest{
+    string source_identity = 1;
+    string name = 3;
+    string credential_type = 4;
+    uint32 expires = 5;
+    string assert_expression = 6;
+    string parameters = 7;
+    string description = 9;
+}
+
+message MetaCredentialUpdateRequest{
+    string source_identity = 1;
+    string name = 3;
+    string credential_type = 4;
+    uint32 expires = 5;
+    string assert_expression = 6;
+    string parameters = 7;
+    string description = 9;
+}
+
+// attribute
+message AttributeEntity{
+    string id = 1;
+    string source_identity = 2;
+    string name = 3;
+    string attribute_type = 4;
+    string description = 7;
+    uint64 create_at = 8;
+}
+
+message ListAttributesResponse{
+    repeated AttributeEntity attributes = 1;
+}
+
+message AttributeCreateRequest{
+    string source_identity = 1;
+    string name = 3;
+    string attribute_type = 4;
+    string description = 7;
+}
+
+message AttributeUpdateRequest{
+    string id = 1;
+    string source_identity = 2;
+    string name = 3;
+    string attribute_type = 4;
+    string description = 7;
+}
+
+// attribute_value
+message AttributeValueEntity{
+    string id = 1;
+    string source_identity = 2;
+    string holder_identity = 3;
+    string name = 4;
+    string value = 5;
+    string labels = 6;
+    string description = 7;
+    uint64 create_at = 8;
+}
+
+message ListAttributeValuesResponse{
+    repeated AttributeValueEntity attribute_values = 1;
+}
+
+message AttributeValueCreateRequest{
+    string source_identity = 1;
+    string holder_identity = 2;
+    string name = 3;
+    string value = 4;
+    string labels = 5;
+    string description = 7;
+}
+
+// VerifiableCredentialEntity
+message VerifiableCredentialEntity{
+    string id = 1;
+    string source_identity = 2;
+    string holder_identity = 3;
+    string meta_credential_name = 4;
+    string cid = 5;
+    string description = 7;
+    uint64 create_at = 8;
+}
+
+message ListVerifiableCredentialsResponse{
+    repeated VerifiableCredentialEntity verifiable_credentials = 1;
+}
+
+message ApplicationEntity{
+    string id = 1;
+    string provider = 2;
+    string application_cid = 3;
+    string application_type = 4;
+    string name = 5;
+    string avatar = 6;
+    repeated string labels = 7;
+    string signature = 8;
+    string description = 9;
+    uint64 create_at = 10;
+}
+
+message ListApplicationsResponse{
+    repeated ApplicationEntity applications = 1;
+}
+
+message ApplicationCreateRequest{
+    string provider = 2;
+    string application_cid = 3;
+    string application_type = 4;
+    string name = 5;
+    string avatar = 6;
+    repeated string labels = 7;
+    string signature = 8;
+    string description = 9;
+}
+
+message ApplicationUpdateRequest{
+    string id = 1;
+    string provider = 2;
+    string application_cid = 3;
+    string application_type = 4;
+    string name = 5;
+    string avatar = 6;
+    repeated string labels = 7;
+    string signature = 8;
+    string description = 9;
+}
+
+message ApplicationSearchRequest{
+    map<string,string> conditions = 1;
+    repeated string sorts = 2;
+    uint32 page = 3;
+    uint32 page_size = 4;
+}
