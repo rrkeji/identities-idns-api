@@ -2,5 +2,5 @@
 members = [
     "crates/micro-keys",
     "crates/micro-identities",
-    "crates/ipfs-idns",
+    "crates/idns-ipfs",
 ]
